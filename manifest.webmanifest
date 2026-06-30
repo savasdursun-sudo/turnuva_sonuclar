@@ -1,0 +1,9 @@
+{
+  "name": "Turnuva Sonuçları",
+  "short_name": "Sonuçlar",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eef3f8",
+  "theme_color": "#f6f8fc",
+  "lang": "tr"
+}

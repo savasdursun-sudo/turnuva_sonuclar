@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f8fc">
+  <meta name="description" content="Turnuva sonuçları, puan durumları ve maç fikstürü">
+  <title>Turnuva Sonuçları</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="top-line">
+        <div>
+          <p class="eyebrow">3 Bant Turnuva</p>
+          <h1 id="tournamentTitle">Turnuva Sonuçları</h1>
+        </div>
+        <button id="refreshBtn" class="icon-btn" type="button" aria-label="Yenile">↻</button>
+      </div>
+      <p id="tournamentMeta" class="muted">Sonuçlar yükleniyor...</p>
+    </header>
+
+    <section id="summaryCards" class="summary-strip" aria-label="Turnuva özeti"></section>
+
+    <main class="content-area">
+      <section id="tab-arama" class="screen active" aria-label="Oyuncu arama">
+        <div class="screen-title">
+          <div>
+            <h2>Oyuncu Ara</h2>
+            <p>Oyuncu ismini yazarak sıralamasını ve maçlarını görün.</p>
+          </div>
+        </div>
+
+        <article class="search-card">
+          <label for="playerSearch">Oyuncu adı</label>
+          <div class="search-input-wrap">
+            <span>⌕</span>
+            <input id="playerSearch" type="search" autocomplete="off" placeholder="Örn: Savaş Dursun">
+          </div>
+          <p class="hint">Türkçe karakter kullanmadan da arama yapabilirsiniz.</p>
+          <div id="searchResults" class="search-results"></div>
+        </article>
+        <div id="playerDetail"></div>
+      </section>
+
+      <section id="tab-grup" class="screen" aria-label="Grup maçları">
+        <div class="screen-title">
+          <div>
+            <h2>Grup Maçları</h2>
+            <p>Puan durumu ve tamamlanan grup maçları.</p>
+          </div>
+        </div>
+
+        <nav class="sub-tabs" aria-label="Grup içeriği">
+          <button class="sub-tab active" data-group-subtab="puan" type="button">Puan Durumu</button>
+          <button class="sub-tab" data-group-subtab="maclar" type="button">Tamamlanan Maçlar</button>
+        </nav>
+
+        <section id="groupPuanPanel" class="sub-panel active">
+          <div class="filter-card standings-filter-card">
+            <label for="standingsFilter">Puan durumu filtresi</label>
+            <select id="standingsFilter" aria-label="Puan durumu filtresi">
+              <option value="all">Tümünü Göster</option>
+            </select>
+          </div>
+          <div id="groupStandings"></div>
+        </section>
+
+        <section id="groupMatchesPanel" class="sub-panel">
+          <div class="filter-card">
+            <label for="groupCompletedFilter">Grup filtresi</label>
+            <select id="groupCompletedFilter" aria-label="Grup filtresi">
+              <option value="all">Tüm gruplar</option>
+            </select>
+          </div>
+          <div id="groupMatchList"></div>
+        </section>
+      </section>
+
+      <section id="tab-eleme" class="screen" aria-label="Eleme maçları">
+        <div class="screen-title action-title">
+          <div>
+            <h2>Eleme Maçları</h2>
+            <p>Eleme fikstürü, sonuçlar ve üst tura çıkanlar.</p>
+          </div>
+          <button id="showChartBtn" class="primary-action" type="button">Chart Göster</button>
+        </div>
+
+        <div class="filter-grid elimination-filters">
+          <div class="filter-card">
+            <label for="eliminationStatusFilter">Maç filtresi</label>
+            <select id="eliminationStatusFilter" aria-label="Eleme maç durumu filtresi">
+              <option value="all">Tüm maçlar</option>
+              <option value="waiting">Bekleyen maçlar</option>
+              <option value="completed">Sonuçlanan maçlar</option>
+            </select>
+          </div>
+          <div class="filter-card">
+            <label for="eliminationRoundFilter">Tur filtresi</label>
+            <select id="eliminationRoundFilter" aria-label="Eleme tur filtresi">
+              <option value="all">Tüm turlar</option>
+            </select>
+          </div>
+        </div>
+        <div id="eliminationList"></div>
+      </section>
+
+      <section id="tab-yaklasan" class="screen" aria-label="Yaklaşan maçlar">
+        <div class="screen-title">
+          <div>
+            <h2>Yaklaşan Maçlar</h2>
+            <p id="upcomingSubtitle">Planlanmış maçlar tarih ve saat sırasına göre listelenir.</p>
+          </div>
+        </div>
+        <div id="upcomingMatches"></div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="bottom-nav" aria-label="Ana sekmeler">
+    <button class="nav-item active" data-tab="arama" type="button">
+      <span class="nav-icon">⌕</span>
+      <span>Oyuncu Ara</span>
+    </button>
+    <button class="nav-item" data-tab="grup" type="button">
+      <span class="nav-icon">▦</span>
+      <span>Grup Maçları</span>
+    </button>
+    <button class="nav-item" data-tab="eleme" type="button">
+      <span class="nav-icon">◇</span>
+      <span>Eleme Maçları</span>
+    </button>
+    <button class="nav-item" data-tab="yaklasan" type="button">
+      <span class="nav-icon">◷</span>
+      <span>Yaklaşan</span>
+    </button>
+  </nav>
+
+
+  <div id="chartOverlay" class="chart-overlay" aria-hidden="true">
+    <div class="chart-modal" role="dialog" aria-modal="true" aria-labelledby="chartTitle">
+      <div class="chart-toolbar">
+        <div>
+          <h2 id="chartTitle">Eleme Chartı</h2>
+          <p id="chartSubtitle" class="muted">Güncel chart görünümü</p>
+        </div>
+        <div class="chart-actions" aria-label="Chart işlemleri">
+          <button id="chartZoomOut" type="button">−</button>
+          <button id="chartZoomIn" type="button">+</button>
+          <button id="chartFit" type="button">Sığdır</button>
+          <button id="chartFullscreen" type="button">Ekranı Kapla</button>
+          <button id="chartRotate" type="button">Döndür</button>
+          <button id="chartClose" class="danger-action" type="button">Kapat</button>
+        </div>
+      </div>
+      <div id="chartViewport" class="chart-viewport">
+        <div id="chartCanvas" class="chart-canvas"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="data/turnuva.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
