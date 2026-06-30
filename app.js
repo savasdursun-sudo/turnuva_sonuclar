@@ -69,20 +69,33 @@
     return "badge muted";
   };
 
+  const hideToast = () => {
+    const el = $("#toast");
+    if (!el) return;
+    window.clearTimeout(toast._timer);
+    el.classList.remove("show");
+    el.textContent = "";
+  };
+
   const toast = (message) => {
     const el = $("#toast");
     if (!el) return;
     el.textContent = message;
     el.classList.add("show");
     window.clearTimeout(toast._timer);
-    toast._timer = window.setTimeout(() => el.classList.remove("show"), 2200);
+    toast._timer = window.setTimeout(() => {
+      el.classList.remove("show");
+      el.textContent = "";
+    }, 2200);
   };
 
   async function loadData() {
+    try {
+      const response = await fetch(`data/turnuva.json?v=${Date.now()}`, { cache: "no-store" });
+      if (response.ok) return response.json();
+    } catch (_) {}
     if (window.TURNUVA_VERISI) return window.TURNUVA_VERISI;
-    const response = await fetch(`data/turnuva.json?v=${Date.now()}`, { cache: "no-store" });
-    if (!response.ok) throw new Error("Turnuva verisi yüklenemedi.");
-    return response.json();
+    throw new Error("Turnuva verisi yüklenemedi.");
   }
 
   function renderHeader() {
@@ -191,6 +204,18 @@
             <thead><tr>${columns.map((c) => `<th class="${c.className || ""}">${esc(c.label)}</th>`).join("")}</tr></thead>
             <tbody>${rows.map((row) => `<tr>${columns.map((c) => `<td class="${c.className || ""}">${esc(c.value(row))}</td>`).join("")}</tr>`).join("")}</tbody>
           </table>
+        </div>
+        <div class="mobile-data-list">
+          ${rows.map((row) => `
+            <article class="mobile-data-card">
+              ${columns.map((c, index) => `
+                <div class="${index === 0 ? "mobile-data-main" : "mobile-data-field"}">
+                  <span>${esc(c.label)}</span>
+                  <strong>${esc(c.value(row))}</strong>
+                </div>
+              `).join("")}
+            </article>
+          `).join("")}
         </div>
       </article>
     `;
@@ -324,6 +349,37 @@
     return "";
   }
 
+  function standingsMobileCard(row, index, options = {}) {
+    const rowClass = tableRowClass(row, index, options.promotedIds || null, asNumber(options.promotedCount));
+    const rank = row.sira || row.eleme_sirasi || index + 1;
+    const showGroup = !!options.showGroup;
+    const groupText = showGroup
+      ? [`Grup ${row.grup_no || "—"}`, row.grup_sirasi ? `${row.grup_sirasi}. sıra` : ""].filter(Boolean).join(" • ")
+      : "";
+    const hcp = row.handikap !== undefined ? ` (${row.handikap})` : "";
+    return `
+      <article class="standing-mobile-card ${rowClass}">
+        <div class="standing-mobile-top">
+          <div class="standing-rank">${esc(rank)}</div>
+          <div class="standing-player">
+            <strong>${esc(row.oyuncu_adi || "—")}</strong>
+            <span>${esc(groupText || `Maç: ${row.mac_sayisi || 0}`)}${hcp ? `<em>${esc(hcp)}</em>` : ""}</span>
+          </div>
+          <div class="standing-points">
+            <span>Puan</span>
+            <strong>${esc(row.puan || 0)}</strong>
+          </div>
+        </div>
+        <div class="standing-stats">
+          <div><span>G/M</span><strong>${esc(row.galibiyet || 0)} / ${esc(row.maglubiyet || 0)}</strong></div>
+          <div><span>Averaj</span><strong>${esc(row.averaj || 0)}</strong></div>
+          <div><span>YS</span><strong>${esc(row.ys1 || 0)} / ${esc(row.ys2 || 0)}</strong></div>
+          <div><span>Ort.</span><strong>${esc(formatAverage(row.ortalama || 0))}</strong></div>
+        </div>
+      </article>
+    `;
+  }
+
   function standingsTable(title, rows, options = {}) {
     if (!rows || !rows.length) return `<article class="card"><div class="card-title"><h3>${esc(title)}</h3></div><div class="empty">Puan durumu yok.</div></article>`;
     const showGroup = !!options.showGroup;
@@ -356,6 +412,9 @@
               `).join("")}
             </tbody>
           </table>
+        </div>
+        <div class="standings-mobile-list">
+          ${rows.map((row, index) => standingsMobileCard(row, index, { showGroup, promotedIds, promotedCount })).join("")}
         </div>
       </article>
     `;
@@ -695,6 +754,23 @@
     overlay?.classList.toggle("rotated", Math.abs(state.chartRotation % 180) === 90);
   }
 
+  function setChartScale(nextScale, anchor = null) {
+    const viewport = $("#chartViewport");
+    const previousScale = state.chartScale || 1;
+    const scale = Math.min(3.5, Math.max(0.1, nextScale));
+    if (viewport && anchor) {
+      const contentX = (viewport.scrollLeft + anchor.x) / previousScale;
+      const contentY = (viewport.scrollTop + anchor.y) / previousScale;
+      state.chartScale = scale;
+      applyChartTransform();
+      viewport.scrollLeft = Math.max(0, (contentX * scale) - anchor.x);
+      viewport.scrollTop = Math.max(0, (contentY * scale) - anchor.y);
+      return;
+    }
+    state.chartScale = scale;
+    applyChartTransform();
+  }
+
   function fitChartToViewport() {
     const viewport = $("#chartViewport");
     const canvas = $("#chartCanvas");
@@ -717,18 +793,19 @@
       state.chartScale = Math.max(0.12, Math.floor(scale * 100) / 100);
       applyChartTransform();
       viewport.scrollTo({ left: 0, top: 0, behavior: "smooth" });
-      toast("Chart ekrana sığdırıldı");
     });
   }
 
   function openChart() {
     const overlay = $("#chartOverlay");
+    hideToast();
     state.chartScale = 1;
     state.chartRotation = 0;
-    state.chartFullscreen = false;
+    state.chartFullscreen = true;
     renderChart();
     overlay?.classList.add("open");
     overlay?.setAttribute("aria-hidden", "false");
+    document.body.classList.add("chart-open");
     requestAnimationFrame(() => {
       drawChartLines();
       fitChartToViewport();
@@ -742,15 +819,62 @@
 
     let dragging = false;
     let moved = false;
+    let pinching = false;
+    let pinchStartDistance = 1;
+    let pinchStartScale = 1;
     let startX = 0;
     let startY = 0;
     let startLeft = 0;
     let startTop = 0;
+    const pointers = new Map();
+
+    const distance = () => {
+      const values = [...pointers.values()];
+      if (values.length < 2) return 1;
+      return Math.hypot(values[0].x - values[1].x, values[0].y - values[1].y);
+    };
+
+    const center = () => {
+      const values = [...pointers.values()];
+      const rect = viewport.getBoundingClientRect();
+      if (values.length < 2) return { x: viewport.clientWidth / 2, y: viewport.clientHeight / 2 };
+      return {
+        x: ((values[0].x + values[1].x) / 2) - rect.left,
+        y: ((values[0].y + values[1].y) / 2) - rect.top,
+      };
+    };
+
+    const startDrag = (point) => {
+      dragging = true;
+      moved = false;
+      startX = point.x;
+      startY = point.y;
+      startLeft = viewport.scrollLeft;
+      startTop = viewport.scrollTop;
+      viewport.classList.add("dragging", "interacting");
+    };
+
+    const startPinch = () => {
+      dragging = false;
+      pinching = true;
+      moved = true;
+      pinchStartDistance = Math.max(1, distance());
+      pinchStartScale = state.chartScale || 1;
+      viewport.classList.add("interacting");
+    };
 
     const stopDrag = (event) => {
-      if (!dragging) return;
+      pointers.delete(event.pointerId);
+      if (pinching && pointers.size === 1) {
+        pinching = false;
+        const point = [...pointers.values()][0];
+        startDrag(point);
+        return;
+      }
+      if (!dragging && !pinching) return;
       dragging = false;
-      viewport.classList.remove("dragging");
+      pinching = false;
+      viewport.classList.remove("dragging", "interacting");
       try { viewport.releasePointerCapture(event.pointerId); } catch (_) {}
       window.setTimeout(() => { moved = false; }, 0);
     };
@@ -758,17 +882,22 @@
     viewport.addEventListener("pointerdown", (event) => {
       if (event.button !== undefined && event.button !== 0) return;
       if (event.target.closest("button, a, input, select, textarea")) return;
-      dragging = true;
-      moved = false;
-      startX = event.clientX;
-      startY = event.clientY;
-      startLeft = viewport.scrollLeft;
-      startTop = viewport.scrollTop;
-      viewport.classList.add("dragging");
+      const point = { x: event.clientX, y: event.clientY };
+      pointers.set(event.pointerId, point);
+      if (pointers.size >= 2) startPinch();
+      else startDrag(point);
       try { viewport.setPointerCapture(event.pointerId); } catch (_) {}
+      event.preventDefault();
     });
 
     viewport.addEventListener("pointermove", (event) => {
+      if (!pointers.has(event.pointerId)) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      if (pinching && pointers.size >= 2) {
+        setChartScale(pinchStartScale * (distance() / pinchStartDistance), center());
+        event.preventDefault();
+        return;
+      }
       if (!dragging) return;
       const dx = event.clientX - startX;
       const dy = event.clientY - startY;
@@ -793,6 +922,8 @@
     const overlay = $("#chartOverlay");
     overlay?.classList.remove("open", "fullscreen", "rotated");
     overlay?.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("chart-open");
+    hideToast();
   }
 
   function bindEvents() {
@@ -820,12 +951,10 @@
     $("#showChartBtn")?.addEventListener("click", openChart);
     $("#chartClose")?.addEventListener("click", closeChart);
     $("#chartZoomIn")?.addEventListener("click", () => {
-      state.chartScale = Math.min(2.5, state.chartScale + 0.1);
-      applyChartTransform();
+      setChartScale(state.chartScale + 0.1, { x: $("#chartViewport")?.clientWidth / 2 || 0, y: $("#chartViewport")?.clientHeight / 2 || 0 });
     });
     $("#chartZoomOut")?.addEventListener("click", () => {
-      state.chartScale = Math.max(0.12, state.chartScale - 0.1);
-      applyChartTransform();
+      setChartScale(state.chartScale - 0.1, { x: $("#chartViewport")?.clientWidth / 2 || 0, y: $("#chartViewport")?.clientHeight / 2 || 0 });
     });
     $("#chartFit")?.addEventListener("click", fitChartToViewport);
     $("#chartFullscreen")?.addEventListener("click", () => {

@@ -1,4 +1,4 @@
-const CACHE_NAME = "turnuva-sonuclari-v16";
+const CACHE_NAME = "turnuva-sonuclari-v18";
 const STATIC_FILES = [
   "./",
   "./index.html",
@@ -22,10 +22,19 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") return;
   const url = new URL(event.request.url);
   if (url.pathname.endsWith("/data/turnuva.json") || url.pathname.endsWith("/data/turnuva.js")) {
     event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
     return;
   }
-  event.respondWith(caches.match(event.request).then((cached) => cached || fetch(event.request)));
+  event.respondWith(
+    fetch(event.request)
+      .then((response) => {
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy)).catch(() => {});
+        return response;
+      })
+      .catch(() => caches.match(event.request))
+  );
 });
