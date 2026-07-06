@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20260703161817";
+const CACHE_VERSION = "20260704172639";
 const STATIC_CACHE = `turnuva-sonuclari-static-${CACHE_VERSION}`;
 const DATA_CACHE = `turnuva-sonuclari-data-${CACHE_VERSION}`;
 const STATIC_FILES = [
@@ -7,7 +7,7 @@ const STATIC_FILES = [
   `./style.css?v=${CACHE_VERSION}`,
   `./app.js?v=${CACHE_VERSION}`,
   `./manifest.webmanifest?v=${CACHE_VERSION}`,
-  `./assets/bilardo-atolyesi-header-blue.png?v=${CACHE_VERSION}`,
+  `./assets/bilardo-atolyesi-header-atolye.jpg?v=${CACHE_VERSION}`,
   `./assets/logo-bilardo-atolyesi.png?v=${CACHE_VERSION}`,
   `./assets/icon-192.png?v=${CACHE_VERSION}`,
   `./assets/icon-512.png?v=${CACHE_VERSION}`,
