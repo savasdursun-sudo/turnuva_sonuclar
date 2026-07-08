@@ -16,10 +16,13 @@
     chartScale: 1,
     chartRotation: 0,
     chartFullscreen: false,
+    listLimits: {},
   };
 
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+  const MATCH_LIST_INITIAL_LIMIT = 80;
+  const MATCH_LIST_MORE_STEP = 80;
 
   const esc = (value) => String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -134,8 +137,6 @@
     if (titleEl) titleEl.textContent = turnuva.ad || "Turnuva Sonuçları";
     const salonNameEl = $("#salonName");
     if (salonNameEl) salonNameEl.textContent = salonAdi;
-    const heroTitleEl = $("#heroLiveTitle");
-    if (heroTitleEl) heroTitleEl.textContent = `${salonAdi} Sonuçlar`;
     const logoEl = $("#salonLogo");
     if (logoEl && salon.logo_url) {
       logoEl.src = `${salon.logo_url}?v=${state.data.yayin_surumu || Date.now()}`;
@@ -546,6 +547,36 @@
     `;
   }
 
+  function resetMatchListLimits(prefix = "") {
+    Object.keys(state.listLimits || {}).forEach((key) => {
+      if (!prefix || key.startsWith(prefix)) delete state.listLimits[key];
+    });
+  }
+
+  function limitedMatchListHtml(listId, matches, renderer, options = {}) {
+    const items = matches || [];
+    const total = items.length;
+    const initial = Math.max(1, asNumber(options.initialLimit, MATCH_LIST_INITIAL_LIMIT));
+    const currentLimit = Math.min(total, Math.max(initial, asNumber(state.listLimits[listId], initial)));
+    const visible = items.slice(0, currentLimit);
+    const listClass = options.listClass || "match-list";
+    const renderType = options.renderType || "";
+    const moreText = total > currentLimit
+      ? `${total - currentLimit} maç daha var`
+      : "";
+    return `
+      <div class="${esc(listClass)}">${visible.map(renderer).join("")}</div>
+      ${total > currentLimit ? `
+        <div class="load-more-wrap">
+          <button class="load-more-btn" type="button" data-load-more-list="${esc(listId)}" data-load-more-render="${esc(renderType)}">
+            Daha fazla göster <span>${esc(moreText)}</span>
+          </button>
+          <p>${esc(currentLimit)} / ${esc(total)} maç gösteriliyor. Büyük turnuvalarda performans için maçlar parça parça yüklenir.</p>
+        </div>
+      ` : ""}
+    `;
+  }
+
   function matchDetailLine(match) {
     const p1 = match.oyuncu1_adi || "Oyuncu 1";
     const p2 = match.oyuncu2_adi || "Oyuncu 2";
@@ -703,6 +734,7 @@
   function tableRowClass(row, index, promotedIds, promotedCount) {
     if (promotedIds && promotedIds.has(Number(row.oyuncu_id))) return index === 0 ? "first" : "promoted";
     if (promotedCount && index < promotedCount) return index === 0 ? "first" : "promoted";
+    if (promotedCount && index >= promotedCount) return "risk";
     return "";
   }
 
@@ -1073,8 +1105,12 @@
       description: "Sadece sonucu girilmiş grup maçları tarih ve saat sırasına göre listelenir.",
       badge: `${matches.length} maç`,
     });
+    const listId = `group-completed:${state.selectedGroupRound || "all"}:${state.completedGroupFilter || "all"}`;
     $("#groupMatchList").innerHTML = matches.length
-      ? `${intro}<div class="match-list group-match-result-list">${matches.map(completedMatchCard).join("")}</div>`
+      ? `${intro}${limitedMatchListHtml(listId, matches, completedMatchCard, {
+          listClass: "match-list group-match-result-list",
+          renderType: "group-completed",
+        })}`
       : `${intro}<div class="empty">Bu bölümde tamamlanan grup maçı bulunamadı.</div>`;
   }
 
@@ -1232,7 +1268,12 @@
         </div>
       </article>
       ${matches.length
-        ? `<div class="match-list elimination-match-list">${matches.map((m) => m.durum === "Tamamlandı" ? completedMatchCard(m) : scheduledMatchCard(m)).join("")}</div>`
+        ? limitedMatchListHtml(
+            `elimination:${state.eliminationStatusFilter || "all"}:${state.eliminationRoundFilter || "all"}`,
+            matches,
+            (m) => m.durum === "Tamamlandı" ? completedMatchCard(m) : scheduledMatchCard(m),
+            { listClass: "match-list elimination-match-list", renderType: "elimination" }
+          )
         : `<div class="empty">Bu filtrede eleme maçı bulunamadı.</div>`}
     `;
   }
@@ -1256,7 +1297,12 @@
     }
 
     $("#upcomingMatches").innerHTML = matches.length
-      ? `<div class="match-list upcoming-flat-list">${matches.map((m) => scheduledMatchCard(m, { showTable: true, showStatus: false })).join("")}</div>`
+      ? limitedMatchListHtml(
+          "upcoming:today-tomorrow",
+          matches,
+          (m) => scheduledMatchCard(m, { showTable: true, showStatus: false }),
+          { listClass: "match-list upcoming-flat-list", renderType: "upcoming" }
+        )
       : `<div class="empty">Bugün veya yarın için sonuç bekleyen planlı maç yok.</div>`;
   }
 
@@ -1764,7 +1810,7 @@
   async function clearLegacyStaticCaches() {
     if (!("caches" in window)) return;
     try {
-      const version = "20260707100615595770";
+      const version = "20260708150504249875";
       const marker = `turnuva-cache-migrated-${version}`;
       if (window.localStorage?.getItem(marker) === "1") return;
       const keys = await caches.keys();
@@ -1780,7 +1826,7 @@
   async function registerServiceWorker() {
     if (!("serviceWorker" in navigator) || !location.protocol.startsWith("http")) return;
     try {
-      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260707100615595770");
+      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260708150504249875");
       if (registration.waiting) registration.waiting.postMessage({ type: "SKIP_WAITING" });
       registration.addEventListener("updatefound", () => {
         const worker = registration.installing;
@@ -1814,6 +1860,7 @@
       state.groupSelectionTouched = true;
       state.autoSelectedGroup = null;
       state.completedGroupFilter = event.target.value;
+      resetMatchListLimits("group-completed:");
       renderGroupCompletedMatches();
     });
     $("#turnResultRoundFilter")?.addEventListener("change", (event) => {
@@ -1824,11 +1871,24 @@
     });
     $("#eliminationStatusFilter")?.addEventListener("change", (event) => {
       state.eliminationStatusFilter = event.target.value;
+      resetMatchListLimits("elimination:");
       renderElimination();
     });
     $("#eliminationRoundFilter")?.addEventListener("change", (event) => {
       state.eliminationRoundFilter = event.target.value;
+      resetMatchListLimits("elimination:");
       renderElimination();
+    });
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-load-more-list]");
+      if (!button) return;
+      const listId = button.dataset.loadMoreList || "";
+      if (!listId) return;
+      state.listLimits[listId] = asNumber(state.listLimits[listId], MATCH_LIST_INITIAL_LIMIT) + MATCH_LIST_MORE_STEP;
+      const renderType = button.dataset.loadMoreRender || "";
+      if (renderType === "group-completed") renderGroupCompletedMatches();
+      else if (renderType === "elimination") renderElimination();
+      else if (renderType === "upcoming") renderUpcoming();
     });
     $("#refreshBtn")?.addEventListener("click", () => window.location.reload());
     $("#showChartBtn")?.addEventListener("click", openChart);

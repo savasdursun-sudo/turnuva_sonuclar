@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "guncelleme_tarihi": "2026-07-07 10:06:15",
+  "guncelleme_tarihi": "2026-07-08 15:05:04",
   "yayinlar": [
     {
       "turnuva_id": 36,
@@ -12,14 +12,14 @@
       "relative_path": "turnuva/2026-3-bant-ligi",
       "index_path": "turnuva/2026-3-bant-ligi/index.html",
       "yayin_durumu": "yayinda",
-      "yayin_surumu": "20260707100615595770",
-      "son_guncelleme": "07.07.2026 10:06",
+      "yayin_surumu": "20260708150504249875",
+      "son_guncelleme": "08.07.2026 15:05",
       "ozet": {
         "oyuncu_sayisi": 19,
         "toplam_mac": 36,
         "tamamlanan_mac": 2,
-        "planlanan_mac": 6,
-        "plan_bekleyen_mac": 28,
+        "planlanan_mac": 8,
+        "plan_bekleyen_mac": 26,
         "grup_turu_sayisi": 4,
         "eleme_turu_sayisi": 0
       }
