@@ -1,7 +1,29 @@
 {
   "schema_version": 1,
-  "guncelleme_tarihi": "2026-07-08 15:05:04",
+  "guncelleme_tarihi": "2026-07-17 11:58:13",
   "yayinlar": [
+    {
+      "turnuva_id": 37,
+      "turnuva_adi": "test1",
+      "salon_adi": "Bilardo Atölyesi",
+      "salon_slug": "bilardo-atolyesi",
+      "turnuva_slug": "test1",
+      "public_id": "HRqrGXNsw1DZJhSG",
+      "relative_path": "turnuva/test1",
+      "index_path": "turnuva/test1/index.html",
+      "yayin_durumu": "yayinda",
+      "yayin_surumu": "20260717115812118762",
+      "son_guncelleme": "17.07.2026 11:58",
+      "ozet": {
+        "oyuncu_sayisi": 120,
+        "toplam_mac": 540,
+        "tamamlanan_mac": 78,
+        "planlanan_mac": 0,
+        "plan_bekleyen_mac": 462,
+        "grup_turu_sayisi": 4,
+        "eleme_turu_sayisi": 0
+      }
+    },
     {
       "turnuva_id": 36,
       "turnuva_adi": "2026 3 Bant Ligi",
@@ -12,14 +34,14 @@
       "relative_path": "turnuva/2026-3-bant-ligi",
       "index_path": "turnuva/2026-3-bant-ligi/index.html",
       "yayin_durumu": "yayinda",
-      "yayin_surumu": "20260708150504249875",
-      "son_guncelleme": "08.07.2026 15:05",
+      "yayin_surumu": "20260711175558015564",
+      "son_guncelleme": "11.07.2026 17:55",
       "ozet": {
         "oyuncu_sayisi": 19,
         "toplam_mac": 36,
         "tamamlanan_mac": 2,
-        "planlanan_mac": 8,
-        "plan_bekleyen_mac": 26,
+        "planlanan_mac": 12,
+        "plan_bekleyen_mac": 22,
         "grup_turu_sayisi": 4,
         "eleme_turu_sayisi": 0
       }
