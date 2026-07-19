@@ -1,7 +1,29 @@
 {
   "schema_version": 1,
-  "guncelleme_tarihi": "2026-07-17 11:58:13",
+  "guncelleme_tarihi": "2026-07-18 16:37:33",
   "yayinlar": [
+    {
+      "turnuva_id": 36,
+      "turnuva_adi": "2026 3 Bant Ligi",
+      "salon_adi": "Bilardo Atölyesi",
+      "salon_slug": "bilardo-atolyesi",
+      "turnuva_slug": "2026-3-bant-ligi",
+      "public_id": "K59eo1DoamZM5k9",
+      "relative_path": "turnuva/2026-3-bant-ligi",
+      "index_path": "turnuva/2026-3-bant-ligi/index.html",
+      "yayin_durumu": "yayinda",
+      "yayin_surumu": "20260718163733406136",
+      "son_guncelleme": "18.07.2026 16:37",
+      "ozet": {
+        "oyuncu_sayisi": 19,
+        "toplam_mac": 36,
+        "tamamlanan_mac": 2,
+        "planlanan_mac": 11,
+        "plan_bekleyen_mac": 23,
+        "grup_turu_sayisi": 4,
+        "eleme_turu_sayisi": 0
+      }
+    },
     {
       "turnuva_id": 37,
       "turnuva_adi": "test1",
@@ -20,28 +42,6 @@
         "tamamlanan_mac": 78,
         "planlanan_mac": 0,
         "plan_bekleyen_mac": 462,
-        "grup_turu_sayisi": 4,
-        "eleme_turu_sayisi": 0
-      }
-    },
-    {
-      "turnuva_id": 36,
-      "turnuva_adi": "2026 3 Bant Ligi",
-      "salon_adi": "Bilardo Atölyesi",
-      "salon_slug": "bilardo-atolyesi",
-      "turnuva_slug": "2026-3-bant-ligi",
-      "public_id": "K59eo1DoamZM5k9",
-      "relative_path": "turnuva/2026-3-bant-ligi",
-      "index_path": "turnuva/2026-3-bant-ligi/index.html",
-      "yayin_durumu": "yayinda",
-      "yayin_surumu": "20260711175558015564",
-      "son_guncelleme": "11.07.2026 17:55",
-      "ozet": {
-        "oyuncu_sayisi": 19,
-        "toplam_mac": 36,
-        "tamamlanan_mac": 2,
-        "planlanan_mac": 12,
-        "plan_bekleyen_mac": 22,
         "grup_turu_sayisi": 4,
         "eleme_turu_sayisi": 0
       }
