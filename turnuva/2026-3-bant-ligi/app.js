@@ -13,6 +13,8 @@
     resultRoundSelectionTouched: false,
     eliminationStatusFilter: "all",
     eliminationRoundFilter: "all",
+    resultsRangeFilter: "5",
+    resultsPlayerFilter: "",
     chartScale: 1,
     chartRotation: 0,
     chartFullscreen: false,
@@ -23,6 +25,12 @@
   const $$ = (selector) => Array.from(document.querySelectorAll(selector));
   const MATCH_LIST_INITIAL_LIMIT = 80;
   const MATCH_LIST_MORE_STEP = 80;
+  const RESULTS_RANGE_LABELS = {
+    "5": "Son 5 Gün",
+    "7": "Son 7 Gün",
+    "30": "Son 30 Gün",
+    all: "Tüm Zamanlar",
+  };
 
   const esc = (value) => String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -1306,6 +1314,38 @@
       : `<div class="empty">Bugün veya yarın için sonuç bekleyen planlı maç yok.</div>`;
   }
 
+  function resultsDateCutoff() {
+    const range = state.resultsRangeFilter || "5";
+    if (range === "all") return null;
+    const days = Math.max(1, asNumber(range, 5));
+    return addDaysISO(localDateISO(), -(days - 1));
+  }
+
+  function renderResults() {
+    const cutoff = resultsDateCutoff();
+    const query = normalize(state.resultsPlayerFilter || "");
+    let matches = (state.data.maclar || []).filter((match) => match.durum === "Tamamlandı");
+    if (cutoff) matches = matches.filter((match) => match.tarih && match.tarih >= cutoff);
+    if (query) {
+      matches = matches.filter((match) =>
+        normalize(match.oyuncu1_adi).includes(query) || normalize(match.oyuncu2_adi).includes(query)
+      );
+    }
+    matches.sort((a, b) => sortTimeValue(b).localeCompare(sortTimeValue(a), "tr"));
+
+    const rangeLabel = RESULTS_RANGE_LABELS[state.resultsRangeFilter] || RESULTS_RANGE_LABELS["5"];
+    const intro = sectionStatusRow({
+      eyebrow: query ? `"${state.resultsPlayerFilter}" için sonuçlar` : rangeLabel,
+      title: "Maç Sonuçları",
+      description: "Grup ve eleme aşamasındaki tüm tamamlanmış maçlar tarih sırasına göre listelenir.",
+      badge: `${matches.length} maç`,
+    });
+    const listId = `results:${state.resultsRangeFilter || "5"}:${query}`;
+    $("#resultsList").innerHTML = matches.length
+      ? intro + limitedMatchListHtml(listId, matches, completedMatchCard, { listClass: "match-list", renderType: "results" })
+      : intro + `<div class="empty">Bu filtreye uyan tamamlanmış maç bulunamadı.</div>`;
+  }
+
   function chartStatus(match) {
     if (match.durum === "Tamamlandı") return "Sonuçlandı";
     if (match.tarih || match.saat) return "Planlandı";
@@ -1810,7 +1850,7 @@
   async function clearLegacyStaticCaches() {
     if (!("caches" in window)) return;
     try {
-      const version = "20260728093004827704";
+      const version = "20260728225714543578";
       const marker = `turnuva-cache-migrated-${version}`;
       if (window.localStorage?.getItem(marker) === "1") return;
       const keys = await caches.keys();
@@ -1826,7 +1866,7 @@
   async function registerServiceWorker() {
     if (!("serviceWorker" in navigator) || !location.protocol.startsWith("http")) return;
     try {
-      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260728093004827704");
+      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260728225714543578");
       if (registration.waiting) registration.waiting.postMessage({ type: "SKIP_WAITING" });
       registration.addEventListener("updatefound", () => {
         const worker = registration.installing;
@@ -1879,6 +1919,16 @@
       resetMatchListLimits("elimination:");
       renderElimination();
     });
+    $("#resultsRangeFilter")?.addEventListener("change", (event) => {
+      state.resultsRangeFilter = event.target.value;
+      resetMatchListLimits("results:");
+      renderResults();
+    });
+    $("#resultsPlayerFilter")?.addEventListener("input", (event) => {
+      state.resultsPlayerFilter = event.target.value;
+      resetMatchListLimits("results:");
+      renderResults();
+    });
     document.addEventListener("click", (event) => {
       const button = event.target.closest("[data-load-more-list]");
       if (!button) return;
@@ -1889,6 +1939,7 @@
       if (renderType === "group-completed") renderGroupCompletedMatches();
       else if (renderType === "elimination") renderElimination();
       else if (renderType === "upcoming") renderUpcoming();
+      else if (renderType === "results") renderResults();
     });
     $("#refreshBtn")?.addEventListener("click", () => window.location.reload());
     $("#showChartBtn")?.addEventListener("click", openChart);
@@ -1942,6 +1993,7 @@
     renderGroupCompletedMatches();
     renderPromoted();
     renderElimination();
+    renderResults();
     renderUpcoming();
     setGroupSubtab(state.groupSubtab || "puan");
   }

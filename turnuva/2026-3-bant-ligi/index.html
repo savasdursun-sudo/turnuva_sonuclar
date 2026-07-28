@@ -8,12 +8,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="description" content="Bilardo Atölyesi 3 Bant turnuva canlı sonuçları, grup puanları, maç fikstürü ve eleme chartı">
   <title>Bilardo Atölyesi Sonuçlar</title>
-  <link rel="manifest" href="manifest.webmanifest?v=20260728093004827704">
-  <link rel="icon" href="favicon.ico?v=20260728093004827704" sizes="any">
-  <link rel="icon" type="image/png" href="assets/favicon.png?v=20260728093004827704">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260728093004827704">
-  <link rel="preload" as="image" href="assets/bilardo-atolyesi-header-atolye.jpg?v=20260728093004827704">
-  <link rel="stylesheet" href="style.css?v=20260728093004827704">
+  <link rel="manifest" href="manifest.webmanifest?v=20260728225714543578">
+  <link rel="icon" href="favicon.ico?v=20260728225714543578" sizes="any">
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=20260728225714543578">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=20260728225714543578">
+  <link rel="preload" as="image" href="assets/bilardo-atolyesi-header-atolye.jpg?v=20260728225714543578">
+  <link rel="stylesheet" href="style.css?v=20260728225714543578">
 </head>
 <body>
   <div class="app-shell">
@@ -131,6 +131,36 @@
         <div id="eliminationList"></div>
       </section>
 
+      <section id="tab-sonuclar" class="screen" aria-label="Maç sonuçları">
+        <div class="screen-title">
+          <div>
+            <h2>Maç Sonuçları</h2>
+            <p>Grup ve eleme aşamasındaki tüm tamamlanmış maçlar tek listede.</p>
+          </div>
+        </div>
+
+        <div class="filter-grid">
+          <div class="filter-card">
+            <label for="resultsRangeFilter">Tarih aralığı</label>
+            <select id="resultsRangeFilter" aria-label="Sonuç tarih aralığı filtresi">
+              <option value="5" selected>Son 5 Gün</option>
+              <option value="7">Son 7 Gün</option>
+              <option value="30">Son 30 Gün</option>
+              <option value="all">Tüm Zamanlar</option>
+            </select>
+          </div>
+          <div class="filter-card">
+            <label for="resultsPlayerFilter">Oyuncu adı</label>
+            <div class="search-input-wrap">
+              <span>⌕</span>
+              <input id="resultsPlayerFilter" type="search" autocomplete="off" placeholder="Örn: Savaş Dursun">
+            </div>
+          </div>
+        </div>
+
+        <div id="resultsList"></div>
+      </section>
+
       <section id="tab-yaklasan" class="screen" aria-label="Yaklaşan maçlar">
         <div class="screen-title">
           <div>
@@ -155,6 +185,10 @@
     <button class="nav-item" data-tab="eleme" type="button">
       <span class="nav-icon">◇</span>
       <span>Elemeler</span>
+    </button>
+    <button class="nav-item" data-tab="sonuclar" type="button">
+      <span class="nav-icon">✓</span>
+      <span>Maç Sonuçları</span>
     </button>
     <button class="nav-item" data-tab="yaklasan" type="button">
       <span class="nav-icon">◷</span>
@@ -186,7 +220,7 @@
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script src="data/turnuva.js?v=20260728093004827704"></script>
-  <script src="app.js?v=20260728093004827704"></script>
+  <script src="data/turnuva.js?v=20260728225714543578"></script>
+  <script src="app.js?v=20260728225714543578"></script>
 </body>
 </html>
