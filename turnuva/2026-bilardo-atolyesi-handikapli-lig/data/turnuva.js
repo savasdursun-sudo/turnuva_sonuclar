@@ -1,8 +1,8 @@
 window.TURNUVA_VERISI = {
   "schema_version": 2,
-  "yayin_surumu": "20260801130204832035",
-  "olusturma_tarihi": "2026-08-01 13:02:04",
-  "son_guncelleme": "01.08.2026 13:02",
+  "yayin_surumu": "20260801134839411548",
+  "olusturma_tarihi": "2026-08-01 13:48:39",
+  "son_guncelleme": "01.08.2026 13:48",
   "siralama_oncelikleri": [
     {
       "kod": "puan",

@@ -357,82 +357,6 @@
     });
   }
 
-  function groupProgress(group) {
-    const total = asNumber(group.toplam_mac);
-    const completed = asNumber(group.tamamlanan_mac);
-    const percent = total > 0 ? Math.min(100, Math.round((completed / total) * 100)) : 0;
-    return { total, completed, percent };
-  }
-
-  function groupLeader(group) {
-    const rows = group.puan_durumu || [];
-    if (!rows.length) return "—";
-    return rows[0].oyuncu_adi || rows[0].isim || "—";
-  }
-
-  function groupStatusText(group) {
-    const progress = groupProgress(group);
-    if (!progress.total) return "Maç yok";
-    if (progress.completed >= progress.total) return "Tamamlandı";
-    if (progress.completed > 0) return "Devam ediyor";
-    return "Başlamadı";
-  }
-
-  function groupOverviewCards(turn) {
-    const groups = turn.gruplar || [];
-    if (!groups.length) return "";
-    const hint = `<div class="group-overview-hint"><span>${esc(groups.length)} grup</span> Grup kartlarını sağa sola kaydırarak tüm grupları görebilirsiniz.</div>`;
-    return `
-      ${hint}
-      <div class="group-overview-grid is-scrollable" aria-label="Grup özeti">
-        ${groups.map((group) => {
-          const progress = groupProgress(group);
-          const status = groupStatusText(group);
-          const statusClass = status === "Tamamlandı" ? "success" : status === "Devam ediyor" ? "warn" : "muted";
-          return `
-            <article class="group-overview-card">
-              <div class="group-overview-head">
-                <div>
-                  <p class="eyebrow">Grup ${esc(group.grup_no || "—")}</p>
-                  <h4>${esc(groupLeader(group))}</h4>
-                </div>
-                <span class="badge ${esc(statusClass)}">${esc(status)}</span>
-              </div>
-              <div class="group-progress-line" aria-label="${esc(progress.completed)} / ${esc(progress.total)} maç tamamlandı">
-                <span style="width: ${esc(progress.percent)}%"></span>
-              </div>
-              <div class="group-overview-stats">
-                <div><span>Maç</span><strong>${esc(progress.completed)} / ${esc(progress.total)}</strong></div>
-                <div><span>Oyuncu</span><strong>${esc(group.oyuncu_sayisi || (group.puan_durumu || []).length || 0)}</strong></div>
-              </div>
-              <div class="group-overview-actions">
-                <button type="button" data-group-overview="${esc(group.grup_no)}" data-target-subtab="puan">Puanları Gör</button>
-                <button type="button" data-group-overview="${esc(group.grup_no)}" data-target-subtab="maclar">Maçları Gör</button>
-              </div>
-            </article>
-          `;
-        }).join("")}
-      </div>
-    `;
-  }
-
-  function bindGroupOverviewActions() {
-    $$('[data-group-overview]').forEach((button) => {
-      button.addEventListener("click", () => {
-        const groupNo = button.dataset.groupOverview;
-        const targetSubtab = button.dataset.targetSubtab || "puan";
-        state.groupSelectionTouched = true;
-        state.standingsFilter = `group:${groupNo}`;
-        state.completedGroupFilter = String(groupNo);
-        buildStandingsOptions();
-        buildGroupCompletedOptions();
-        renderStandings();
-        renderGroupCompletedMatches();
-        setGroupSubtab(targetSubtab);
-      });
-    });
-  }
-
   function renderGroupRoundSummary() {
     const el = $("#groupRoundSummary");
     if (!el) return;
@@ -464,9 +388,7 @@
           <div><span>Çıkan</span><strong>${esc(promotedCount)}</strong></div>
         </div>
       </article>
-      ${groupOverviewCards(turn)}
     `;
-    bindGroupOverviewActions();
   }
 
   function latestUpperRoundStatus(player) {
@@ -1792,7 +1714,7 @@
   async function clearLegacyStaticCaches() {
     if (!("caches" in window)) return;
     try {
-      const version = "20260801130204832035";
+      const version = "20260801134839411548";
       const marker = `turnuva-cache-migrated-${version}`;
       if (window.localStorage?.getItem(marker) === "1") return;
       const keys = await caches.keys();
@@ -1808,7 +1730,7 @@
   async function registerServiceWorker() {
     if (!("serviceWorker" in navigator) || !location.protocol.startsWith("http")) return;
     try {
-      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260801130204832035");
+      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260801134839411548");
       if (registration.waiting) registration.waiting.postMessage({ type: "SKIP_WAITING" });
       registration.addEventListener("updatefound", () => {
         const worker = registration.installing;
