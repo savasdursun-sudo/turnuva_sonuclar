@@ -746,37 +746,6 @@
     return "";
   }
 
-  function standingsMobileCard(row, index, options = {}) {
-    const rowClass = tableRowClass(row, index, options.promotedIds || null, asNumber(options.promotedCount));
-    const rank = row.sira || row.eleme_sirasi || index + 1;
-    const showGroup = !!options.showGroup;
-    const groupText = showGroup
-      ? [`Grup ${row.grup_no || "—"}`, row.grup_sirasi ? `${row.grup_sirasi}. sıra` : ""].filter(Boolean).join(" • ")
-      : "";
-    const hcp = row.handikap !== undefined ? ` (${row.handikap})` : "";
-    return `
-      <article class="standing-mobile-card ${rowClass}">
-        <div class="standing-mobile-top">
-          <div class="standing-rank">${esc(rank)}</div>
-          <div class="standing-player">
-            <strong>${esc(row.oyuncu_adi || "—")}</strong>
-            <span>${esc(groupText || `Maç: ${row.mac_sayisi || 0}`)}${hcp ? `<em>${esc(hcp)}</em>` : ""}</span>
-          </div>
-          <div class="standing-points">
-            <span>Puan</span>
-            <strong>${esc(row.puan || 0)}</strong>
-          </div>
-        </div>
-        <div class="standing-stats">
-          <div><span>G/M</span><strong>${esc(row.galibiyet || 0)} / ${esc(row.maglubiyet || 0)}</strong></div>
-          <div><span>Averaj</span><strong>${esc(row.averaj || 0)}</strong></div>
-          <div><span>YS</span><strong>${esc(row.ys1 || 0)} / ${esc(row.ys2 || 0)}</strong></div>
-          <div><span>Ort.</span><strong>${esc(formatAverage(row.ortalama || 0))}</strong></div>
-        </div>
-      </article>
-    `;
-  }
-
   function standingsTable(title, rows, options = {}) {
     if (!rows || !rows.length) return `<article class="card"><div class="card-title"><h3>${esc(title)}</h3></div><div class="empty">Puan durumu yok.</div></article>`;
     const showGroup = !!options.showGroup;
@@ -809,9 +778,6 @@
               `).join("")}
             </tbody>
           </table>
-        </div>
-        <div class="standings-mobile-list">
-          ${rows.map((row, index) => standingsMobileCard(row, index, { showGroup, promotedIds, promotedCount })).join("")}
         </div>
       </article>
     `;
@@ -851,27 +817,6 @@
     if (code === "final") return "result-section final-section";
     if (code === "klasman") return "result-section klasman-section";
     return "result-section upper-section";
-  }
-
-  function turnResultMobileCard(row) {
-    return `
-      <article class="turn-result-card">
-        <div class="turn-result-top">
-          <div class="standing-rank">${esc(row.sira || "—")}</div>
-          <div class="standing-player">
-            <strong>${esc(row.oyuncu_adi || "—")}${row.handikap !== undefined ? ` <em>(${esc(row.handikap)})</em>` : ""}</strong>
-            <span>Geldiği grup: ${esc(row.grup_no || "—")} • Grup sırası: ${esc(row.grup_sirasi || "—")}</span>
-          </div>
-        </div>
-        <div class="destination-pill">${esc(destinationText(row))}</div>
-        <div class="standing-stats">
-          <div><span>Puan</span><strong>${esc(row.puan || 0)}</strong></div>
-          <div><span>Averaj</span><strong>${esc(row.averaj || 0)}</strong></div>
-          <div><span>YS</span><strong>${esc(row.ys1 || 0)} / ${esc(row.ys2 || 0)}</strong></div>
-          <div><span>Ort.</span><strong>${esc(formatAverage(row.ortalama || 0))}</strong></div>
-        </div>
-      </article>
-    `;
   }
 
   function turnResultSection(section) {
@@ -918,9 +863,6 @@
               `).join("")}
             </tbody>
           </table>
-        </div>
-        <div class="turn-result-mobile-list">
-          ${rows.map(turnResultMobileCard).join("")}
         </div>
       </article>
     `;
@@ -1850,7 +1792,7 @@
   async function clearLegacyStaticCaches() {
     if (!("caches" in window)) return;
     try {
-      const version = "20260801124604529089";
+      const version = "20260801130204832035";
       const marker = `turnuva-cache-migrated-${version}`;
       if (window.localStorage?.getItem(marker) === "1") return;
       const keys = await caches.keys();
@@ -1866,7 +1808,7 @@
   async function registerServiceWorker() {
     if (!("serviceWorker" in navigator) || !location.protocol.startsWith("http")) return;
     try {
-      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260801124604529089");
+      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260801130204832035");
       if (registration.waiting) registration.waiting.postMessage({ type: "SKIP_WAITING" });
       registration.addEventListener("updatefound", () => {
         const worker = registration.installing;

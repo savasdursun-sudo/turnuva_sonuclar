@@ -206,107 +206,16 @@ tr.promoted td, tr.first td { color: #0b5f4d; font-weight: 800; }
 .hcp { color: var(--muted); font-weight: 700; }
 .points-cell { font-weight: 900; color: var(--accent-2); }
 
-.standings-mobile-list,
 .mobile-data-list {
   display: none;
 }
 
-.standing-mobile-card,
 .mobile-data-card {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
 }
 
-.standing-mobile-card {
-  padding: 10px;
-}
-
-.standing-mobile-card.promoted {
-  border-color: #9bdcc9;
-  background: #f0fbf7;
-}
-
-.standing-mobile-card.first {
-  border-color: #5fc9aa;
-  background: #e7f8f2;
-}
-
-.standing-mobile-top {
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr) auto;
-  gap: 9px;
-  align-items: center;
-}
-
-.standing-rank {
-  width: 34px;
-  height: 34px;
-  display: grid;
-  place-items: center;
-  border-radius: 8px;
-  background: #eef5fb;
-  color: var(--accent-2);
-  font-weight: 900;
-}
-
-.standing-mobile-card.first .standing-rank,
-.standing-mobile-card.promoted .standing-rank {
-  background: var(--accent);
-  color: #fff;
-}
-
-.standing-player {
-  min-width: 0;
-}
-
-.standing-player strong {
-  display: block;
-  overflow-wrap: anywhere;
-  line-height: 1.22;
-}
-
-.standing-player span {
-  display: block;
-  margin-top: 3px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.standing-player em {
-  margin-left: 4px;
-  color: var(--muted);
-  font-style: normal;
-  font-weight: 800;
-}
-
-.standing-points {
-  min-width: 58px;
-  text-align: right;
-}
-
-.standing-points span {
-  display: block;
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.standing-points strong {
-  display: block;
-  color: var(--accent-2);
-  font-size: 22px;
-  line-height: 1.05;
-}
-
-.standing-stats {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 6px;
-  margin-top: 10px;
-}
-
-.standing-stats div,
 .mobile-data-field,
 .mobile-data-main {
   border: 1px solid #e6edf4;
@@ -315,7 +224,6 @@ tr.promoted td, tr.first td { color: #0b5f4d; font-weight: 800; }
   padding: 8px;
 }
 
-.standing-stats span,
 .mobile-data-field span,
 .mobile-data-main span {
   display: block;
@@ -324,7 +232,6 @@ tr.promoted td, tr.first td { color: #0b5f4d; font-weight: 800; }
   font-weight: 800;
 }
 
-.standing-stats strong,
 .mobile-data-field strong,
 .mobile-data-main strong {
   display: block;
@@ -334,11 +241,6 @@ tr.promoted td, tr.first td { color: #0b5f4d; font-weight: 800; }
 }
 
 .mobile-data-list {
-  gap: 8px;
-  padding: 10px;
-}
-
-.standings-mobile-list {
   gap: 8px;
   padding: 10px;
 }
@@ -656,11 +558,9 @@ body.chart-open .bottom-nav {
   .kv-grid { grid-template-columns: 1fr; }
   .card-title { flex-direction: column; }
   .table-head { padding: 12px; }
-  .standings-card .table-scroll,
   .compact-table .table-scroll {
     display: none;
   }
-  .standings-mobile-list,
   .mobile-data-list {
     display: grid;
   }
@@ -675,7 +575,6 @@ body.chart-open .bottom-nav {
   .match-main-row { flex-direction: column; }
   .score-box { width: 100%; }
   .nav-item { font-size: 10px; }
-  .standing-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mobile-data-card { grid-template-columns: 1fr; }
   table { min-width: 720px; }
 }
@@ -984,56 +883,6 @@ body {
 .result-table-wrap {
   background: #fff;
 }
-.turn-result-mobile-list {
-  display: none;
-  gap: 9px;
-  padding: 10px;
-}
-.turn-result-card {
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: #fff;
-  padding: 10px;
-}
-.final-section .turn-result-card {
-  border-color: #9bdcc9;
-  background: #f0fbf7;
-}
-.klasman-section .turn-result-card {
-  border-color: #f1cf8c;
-  background: #fffaf0;
-}
-.upper-section .turn-result-card {
-  border-color: #bdd6ef;
-  background: #f5faff;
-}
-.turn-result-top {
-  display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  gap: 9px;
-  align-items: center;
-}
-.destination-pill {
-  margin-top: 9px;
-  padding: 8px 10px;
-  border-radius: 9px;
-  background: var(--panel-2);
-  border: 1px solid #e6edf4;
-  color: #0c3f52;
-  font-weight: 900;
-  font-size: 13px;
-}
-.final-section .destination-pill {
-  background: var(--accent-soft);
-  border-color: #b6e6d9;
-  color: #07523f;
-}
-.klasman-section .destination-pill {
-  background: var(--warn-soft);
-  border-color: #f3d798;
-  color: #7a4a08;
-}
-
 @media (max-width: 760px), (hover: none) and (pointer: coarse) {
   .turn-result-filter-card {
     grid-template-columns: 1fr;
@@ -1047,12 +896,6 @@ body {
   .result-section-head {
     display: grid;
     grid-template-columns: 1fr;
-  }
-  .result-table-wrap {
-    display: none;
-  }
-  .turn-result-mobile-list {
-    display: grid;
   }
 }
 
@@ -1068,7 +911,7 @@ body {
   background-image:
     linear-gradient(90deg, rgba(3, 12, 22, .18) 0%, rgba(5, 18, 32, .06) 38%, rgba(5, 16, 30, .18) 100%),
     linear-gradient(180deg, rgba(4, 12, 22, .08), rgba(4, 12, 22, .20)),
-    url("assets/bilardo-atolyesi-header-atolye.jpg?v=20260801124604529089");
+    url("assets/bilardo-atolyesi-header-atolye.jpg?v=20260801130204832035");
   background-size: cover;
   background-position: center;
   position: relative;
@@ -1687,21 +1530,6 @@ tbody tr.risk {
 
 tbody tr.risk td {
   color: #6c7785;
-}
-
-.standing-mobile-card.risk {
-  border-color: #d9e0e7;
-  background: #f5f7f9;
-}
-
-.standing-mobile-card.risk .standing-rank {
-  background: #e4e9ee;
-  color: #7a8794;
-}
-
-.standing-mobile-card.risk .standing-points strong,
-.standing-mobile-card.risk .standing-player strong {
-  color: #596575;
 }
 
 .load-more-wrap {
