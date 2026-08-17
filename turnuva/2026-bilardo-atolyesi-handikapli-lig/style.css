@@ -265,6 +265,7 @@ tr.promoted td, tr.first td { color: #0b5f4d; font-weight: 800; }
 .match-meta { color: var(--muted); font-size: 12px; margin-top: 7px; display: flex; flex-wrap: wrap; gap: 7px; }
 .match-meta span { padding: 3px 7px; border-radius: 6px; background: #f0f5f9; }
 .winner { color: var(--accent); margin-top: 8px; font-weight: 900; }
+.winner.tie { color: var(--warn); }
 .score-box {
   min-width: 86px;
   border-radius: 8px;
@@ -658,6 +659,7 @@ body {
   box-shadow: inset 0 1px 0 rgba(255,255,255,.9);
 }
 .winner { color: #078463; }
+.winner.tie { color: var(--warn); }
 
 .bottom-nav {
   border-color: rgba(196, 212, 224, .95);
@@ -911,7 +913,7 @@ body {
   background-image:
     linear-gradient(90deg, rgba(3, 12, 22, .18) 0%, rgba(5, 18, 32, .06) 38%, rgba(5, 16, 30, .18) 100%),
     linear-gradient(180deg, rgba(4, 12, 22, .08), rgba(4, 12, 22, .20)),
-    url("assets/bilardo-atolyesi-header-atolye.jpg?v=20260816223952544373");
+    url("assets/bilardo-atolyesi-header-atolye.jpg?v=20260817223028885915");
   background-size: cover;
   background-position: center;
   position: relative;

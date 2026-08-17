@@ -527,7 +527,9 @@
               ${match.grup_no ? `<span>Grup ${esc(match.grup_no)}</span>` : ""}
               <span>${formatDate(match.tarih)} ${esc(match.saat || "")}</span>
             </div>
-            ${match.kazanan_adi ? `<div class="winner">Kazanan: ${esc(match.kazanan_adi)}</div>` : ""}
+            ${match.beraberlik
+              ? `<div class="winner tie">Sonuç: Beraberlik — her iki oyuncuya 1 puan</div>`
+              : (match.kazanan_adi ? `<div class="winner">Kazanan: ${esc(match.kazanan_adi)}</div>` : "")}
           </div>
           <div class="score-box">
             <span>Skor</span>
@@ -631,7 +633,7 @@
         <div class="kv-grid player-summary-grid">
           <div class="kv ${upcoming.length ? "highlight-kv" : ""}"><span>Yaklaşan maç</span><strong>${esc(upcoming.length ? `${upcoming.length} maç` : "Yok")}</strong></div>
           <div class="kv"><span>Son grup sırası</span><strong>${esc(latestGroup.grup_no ? `${latestGroup.tur_no}. Tur / Grup ${latestGroup.grup_no} / ${latestGroup.sira}. sıra` : "—")}</strong></div>
-          <div class="kv"><span>Galibiyet / Mağlubiyet</span><strong>${esc(summary.galibiyet || 0)} / ${esc(summary.maglubiyet || 0)}</strong></div>
+          <div class="kv"><span>Galibiyet / Beraberlik / Mağlubiyet</span><strong>${esc(summary.galibiyet || 0)} / ${esc(summary.beraberlik || 0)} / ${esc(summary.maglubiyet || 0)}</strong></div>
           <div class="kv"><span>Ortalama</span><strong>${esc(formatAverage(latestStats.ortalama || 0))}</strong></div>
         </div>
       </article>
@@ -675,7 +677,7 @@
     const promotedCount = asNumber(options.promotedCount);
     const headers = ["Sıra", "Oyuncu"]
       .concat(showGroup ? ["Grup"] : [])
-      .concat(["Maç", "G", "M", "Averaj", "1. YS", "2. YS", "Ort.", "Puan"]);
+      .concat(["Maç", "G", "B", "M", "Averaj", "1. YS", "2. YS", "Ort.", "Puan"]);
     return `
       <article class="table-card standings-card">
         <div class="table-head"><h3>${esc(title)}</h3><span class="badge muted">${rows.length} oyuncu</span></div>
@@ -690,6 +692,7 @@
                   ${showGroup ? `<td>${esc(row.grup_no || "—")}</td>` : ""}
                   <td>${esc(row.mac_sayisi || 0)}</td>
                   <td>${esc(row.galibiyet || 0)}</td>
+                  <td>${esc(row.beraberlik || 0)}</td>
                   <td>${esc(row.maglubiyet || 0)}</td>
                   <td>${esc(row.averaj || 0)}</td>
                   <td>${esc(row.ys1 || 0)}</td>
@@ -719,6 +722,7 @@
         handikap: full.handikap ?? row.handikap,
         mac_sayisi: full.mac_sayisi ?? row.mac_sayisi ?? 0,
         galibiyet: full.galibiyet ?? row.galibiyet ?? 0,
+        beraberlik: full.beraberlik ?? row.beraberlik ?? 0,
         maglubiyet: full.maglubiyet ?? row.maglubiyet ?? 0,
         ortalama: full.ortalama ?? row.ortalama ?? 0,
       };
@@ -1714,7 +1718,7 @@
   async function clearLegacyStaticCaches() {
     if (!("caches" in window)) return;
     try {
-      const version = "20260816223952544373";
+      const version = "20260817223028885915";
       const marker = `turnuva-cache-migrated-${version}`;
       if (window.localStorage?.getItem(marker) === "1") return;
       const keys = await caches.keys();
@@ -1730,7 +1734,7 @@
   async function registerServiceWorker() {
     if (!("serviceWorker" in navigator) || !location.protocol.startsWith("http")) return;
     try {
-      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260816223952544373");
+      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260817223028885915");
       if (registration.waiting) registration.waiting.postMessage({ type: "SKIP_WAITING" });
       registration.addEventListener("updatefound", () => {
         const worker = registration.installing;
