@@ -1718,7 +1718,7 @@
   async function clearLegacyStaticCaches() {
     if (!("caches" in window)) return;
     try {
-      const version = "20260820121627395016";
+      const version = "20260820193751434054";
       const marker = `turnuva-cache-migrated-${version}`;
       if (window.localStorage?.getItem(marker) === "1") return;
       const keys = await caches.keys();
@@ -1734,7 +1734,7 @@
   async function registerServiceWorker() {
     if (!("serviceWorker" in navigator) || !location.protocol.startsWith("http")) return;
     try {
-      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260820121627395016");
+      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260820193751434054");
       if (registration.waiting) registration.waiting.postMessage({ type: "SKIP_WAITING" });
       registration.addEventListener("updatefound", () => {
         const worker = registration.installing;
