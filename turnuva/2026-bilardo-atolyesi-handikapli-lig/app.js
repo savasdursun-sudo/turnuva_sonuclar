@@ -80,9 +80,14 @@
   const formatAverage = (value) => asNumber(value).toFixed(3).replace(".", ",");
 
   const matchAverage = (match, playerNo) => {
+    const rakipNo = playerNo === 1 ? 2 : 1;
     const sayi = asNumber(match[`oyuncu${playerNo}_sayi`]);
+    const rakipSayi = asNumber(match[`oyuncu${rakipNo}_sayi`]);
+    const handikap = asNumber(match[`oyuncu${playerNo}_handikap`]);
     const istaka = asNumber(match[`oyuncu${playerNo}_istaka`]);
-    return istaka > 0 ? sayi / istaka : 0;
+    if (istaka <= 0) return 0;
+    const ortalamaPayi = sayi - (Math.max(sayi, rakipSayi) - handikap);
+    return ortalamaPayi / istaka;
   };
 
   const playerNameWithHandicap = (match, playerNo) => {
@@ -512,7 +517,8 @@
     const p2 = match.oyuncu2_adi || "Oyuncu 2";
     const p1Ys = `${asNumber(match.oyuncu1_ys1)}/${asNumber(match.oyuncu1_ys2)}`;
     const p2Ys = `${asNumber(match.oyuncu2_ys1)}/${asNumber(match.oyuncu2_ys2)}`;
-    return `(${p1} - YS: ${p1Ys} - Ort: ${formatAverage(matchAverage(match, 1))}) - (${p2} - YS: ${p2Ys} - Ort: ${formatAverage(matchAverage(match, 2))})`;
+    const istaka = Math.max(asNumber(match.oyuncu1_istaka), asNumber(match.oyuncu2_istaka));
+    return `(${p1} - YS: ${p1Ys} - Ort: ${formatAverage(matchAverage(match, 1))}) - (${p2} - YS: ${p2Ys} - Ort: ${formatAverage(matchAverage(match, 2))}) (Istaka: ${istaka})`;
   }
 
   function completedMatchCard(match) {
@@ -619,7 +625,6 @@
     const latestGroup = (player.grup_siralar || []).slice(-1)[0] || {};
     const summary = player.mac_ozeti || {};
     const completed = (player.oynanan_maclar || []).filter((m) => m.durum === "Tamamlandı");
-    const latestStats = latestGroup || {};
     const upcoming = playerUpcomingMatches(player.oyuncu_id);
     el.innerHTML = `
       <article class="card player-card player-profile-card">
@@ -634,7 +639,7 @@
           <div class="kv ${upcoming.length ? "highlight-kv" : ""}"><span>Yaklaşan maç</span><strong>${esc(upcoming.length ? `${upcoming.length} maç` : "Yok")}</strong></div>
           <div class="kv"><span>Son grup sırası</span><strong>${esc(latestGroup.grup_no ? `${latestGroup.tur_no}. Tur / Grup ${latestGroup.grup_no} / ${latestGroup.sira}. sıra` : "—")}</strong></div>
           <div class="kv"><span>Galibiyet / Beraberlik / Mağlubiyet</span><strong>${esc(summary.galibiyet || 0)} / ${esc(summary.beraberlik || 0)} / ${esc(summary.maglubiyet || 0)}</strong></div>
-          <div class="kv"><span>Ortalama</span><strong>${esc(formatAverage(latestStats.ortalama || 0))}</strong></div>
+          <div class="kv"><span>Ortalama</span><strong>${esc(formatAverage(summary.ortalama || 0))}</strong></div>
         </div>
       </article>
       ${playerUpcomingSection(player)}
@@ -1718,7 +1723,7 @@
   async function clearLegacyStaticCaches() {
     if (!("caches" in window)) return;
     try {
-      const version = "20260822195414397223";
+      const version = "20260822202823379289";
       const marker = `turnuva-cache-migrated-${version}`;
       if (window.localStorage?.getItem(marker) === "1") return;
       const keys = await caches.keys();
@@ -1734,7 +1739,7 @@
   async function registerServiceWorker() {
     if (!("serviceWorker" in navigator) || !location.protocol.startsWith("http")) return;
     try {
-      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260822195414397223");
+      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260822202823379289");
       if (registration.waiting) registration.waiting.postMessage({ type: "SKIP_WAITING" });
       registration.addEventListener("updatefound", () => {
         const worker = registration.installing;
