@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "guncelleme_tarihi": "2026-09-07 23:50:52",
+  "guncelleme_tarihi": "2026-09-08 21:15:55",
   "yayinlar": [
     {
       "turnuva_id": 42,
@@ -12,14 +12,14 @@
       "relative_path": "turnuva/2026-bilardo-atolyesi-handikapli-lig",
       "index_path": "turnuva/2026-bilardo-atolyesi-handikapli-lig/index.html",
       "yayin_durumu": "yayinda",
-      "yayin_surumu": "20260907235039100625",
-      "son_guncelleme": "07.09.2026 23:50",
+      "yayin_surumu": "20260908211537439926",
+      "son_guncelleme": "08.09.2026 21:15",
       "ozet": {
         "oyuncu_sayisi": 220,
         "toplam_mac": 1100,
-        "tamamlanan_mac": 495,
+        "tamamlanan_mac": 493,
         "planlanan_mac": 15,
-        "plan_bekleyen_mac": 590,
+        "plan_bekleyen_mac": 592,
         "grup_turu_sayisi": 4,
         "eleme_turu_sayisi": 0
       }
