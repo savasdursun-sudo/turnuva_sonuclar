@@ -624,7 +624,9 @@
     }
     const latestGroup = (player.grup_siralar || []).slice(-1)[0] || {};
     const summary = player.mac_ozeti || {};
-    const completed = (player.oynanan_maclar || []).filter((m) => m.durum === "Tamamlandı");
+    const completed = (player.oynanan_maclar || [])
+      .filter((m) => m.durum === "Tamamlandı")
+      .sort((a, b) => sortTimeValue(b).localeCompare(sortTimeValue(a), "tr"));
     const upcoming = playerUpcomingMatches(player.oyuncu_id);
     el.innerHTML = `
       <article class="card player-card player-profile-card">
@@ -1723,7 +1725,7 @@
   async function clearLegacyStaticCaches() {
     if (!("caches" in window)) return;
     try {
-      const version = "20260909002521332500";
+      const version = "20260910000054708634";
       const marker = `turnuva-cache-migrated-${version}`;
       if (window.localStorage?.getItem(marker) === "1") return;
       const keys = await caches.keys();
@@ -1739,7 +1741,7 @@
   async function registerServiceWorker() {
     if (!("serviceWorker" in navigator) || !location.protocol.startsWith("http")) return;
     try {
-      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260909002521332500");
+      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260910000054708634");
       if (registration.waiting) registration.waiting.postMessage({ type: "SKIP_WAITING" });
       registration.addEventListener("updatefound", () => {
         const worker = registration.installing;
