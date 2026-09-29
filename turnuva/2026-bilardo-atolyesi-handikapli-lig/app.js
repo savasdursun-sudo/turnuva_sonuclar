@@ -512,7 +512,14 @@
     `;
   }
 
+  // Hükmen sonuç (§24): istatistik_disi maçlar sembolik 0-0 skorludur;
+  // skor/YS/ortalama yerine "Hükmen" gösterilir.
+  function isForfeit(match) {
+    return Boolean(match && match.istatistik_disi);
+  }
+
   function matchDetailLine(match) {
+    if (isForfeit(match)) return "Hükmen sonuç — ortalamaya dahil değil";
     const p1 = match.oyuncu1_adi || "Oyuncu 1";
     const p2 = match.oyuncu2_adi || "Oyuncu 2";
     const p1Ys = `${asNumber(match.oyuncu1_ys1)}/${asNumber(match.oyuncu1_ys2)}`;
@@ -533,13 +540,15 @@
               ${match.grup_no ? `<span>Grup ${esc(match.grup_no)}</span>` : ""}
               <span>${formatDate(match.tarih)} ${esc(match.saat || "")}</span>
             </div>
-            ${match.beraberlik
-              ? `<div class="winner tie">Sonuç: Beraberlik — her iki oyuncuya 1 puan</div>`
-              : (match.kazanan_adi ? `<div class="winner">Kazanan: ${esc(match.kazanan_adi)}</div>` : "")}
+            ${isForfeit(match)
+              ? (match.kazanan_adi ? `<div class="winner">Hükmen Galip: ${esc(match.kazanan_adi)}</div>` : "")
+              : match.beraberlik
+                ? `<div class="winner tie">Sonuç: Beraberlik — her iki oyuncuya 1 puan</div>`
+                : (match.kazanan_adi ? `<div class="winner">Kazanan: ${esc(match.kazanan_adi)}</div>` : "")}
           </div>
           <div class="score-box">
             <span>Skor</span>
-            <strong>${esc(match.skor || "—")}</strong>
+            <strong>${esc(isForfeit(match) ? "Hükmen" : (match.skor || "—"))}</strong>
           </div>
         </div>
         <div class="match-detail-line">${esc(matchDetailLine(match))}</div>
@@ -1725,7 +1734,7 @@
   async function clearLegacyStaticCaches() {
     if (!("caches" in window)) return;
     try {
-      const version = "20260929224111747745";
+      const version = "20260930000236015380";
       const marker = `turnuva-cache-migrated-${version}`;
       if (window.localStorage?.getItem(marker) === "1") return;
       const keys = await caches.keys();
@@ -1741,7 +1750,7 @@
   async function registerServiceWorker() {
     if (!("serviceWorker" in navigator) || !location.protocol.startsWith("http")) return;
     try {
-      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260929224111747745");
+      const registration = await navigator.serviceWorker.register("service-worker.js?v=20260930000236015380");
       if (registration.waiting) registration.waiting.postMessage({ type: "SKIP_WAITING" });
       registration.addEventListener("updatefound", () => {
         const worker = registration.installing;
