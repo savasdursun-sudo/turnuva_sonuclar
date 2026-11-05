@@ -1,8 +1,8 @@
 window.TURNUVA_VERISI = {
   "schema_version": 2,
-  "yayin_surumu": "20261105234152271061",
-  "olusturma_tarihi": "2026-11-05 23:41:52",
-  "son_guncelleme": "05.11.2026 23:41",
+  "yayin_surumu": "20261106003328152046",
+  "olusturma_tarihi": "2026-11-06 00:33:28",
+  "son_guncelleme": "06.11.2026 00:33",
   "siralama_oncelikleri": [
     {
       "kod": "puan",
@@ -3082,18 +3082,6 @@ window.TURNUVA_VERISI = {
         },
         {
           "eleme_sirasi": 50,
-          "oyuncu_id": 287,
-          "oyuncu_adi": "Murat Tekin",
-          "grup_no": 16,
-          "grup_sirasi": 3,
-          "puan": 12,
-          "averaj": -16,
-          "ys1": 5,
-          "ys2": 5,
-          "ortalama": 0.591
-        },
-        {
-          "eleme_sirasi": 51,
           "oyuncu_id": 352,
           "oyuncu_adi": "Metin Dalan",
           "grup_no": 17,
@@ -3105,7 +3093,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 0.731
         },
         {
-          "eleme_sirasi": 52,
+          "eleme_sirasi": 51,
           "oyuncu_id": 328,
           "oyuncu_adi": "Umut Beslem",
           "grup_no": 13,
@@ -3117,7 +3105,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 0.433
         },
         {
-          "eleme_sirasi": 53,
+          "eleme_sirasi": 52,
           "oyuncu_id": 356,
           "oyuncu_adi": "Serkan Fitoz",
           "grup_no": 3,
@@ -3129,7 +3117,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 0.772
         },
         {
-          "eleme_sirasi": 54,
+          "eleme_sirasi": 53,
           "oyuncu_id": 407,
           "oyuncu_adi": "Yaşar Çapak",
           "grup_no": 18,
@@ -3141,7 +3129,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 0.756
         },
         {
-          "eleme_sirasi": 55,
+          "eleme_sirasi": 54,
           "oyuncu_id": 279,
           "oyuncu_adi": "Erhan Canbaz",
           "grup_no": 20,
@@ -3153,7 +3141,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 1.063
         },
         {
-          "eleme_sirasi": 56,
+          "eleme_sirasi": 55,
           "oyuncu_id": 375,
           "oyuncu_adi": "Tanju Üretmen",
           "grup_no": 5,
@@ -3165,7 +3153,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 0.637
         },
         {
-          "eleme_sirasi": 57,
+          "eleme_sirasi": 56,
           "oyuncu_id": 382,
           "oyuncu_adi": "Ali Karadağ",
           "grup_no": 11,
@@ -3177,7 +3165,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 0.396
         },
         {
-          "eleme_sirasi": 58,
+          "eleme_sirasi": 57,
           "oyuncu_id": 402,
           "oyuncu_adi": "Şeref Işıkçı",
           "grup_no": 2,
@@ -3187,6 +3175,18 @@ window.TURNUVA_VERISI = {
           "ys1": 8,
           "ys2": 6,
           "ortalama": 0.675
+        },
+        {
+          "eleme_sirasi": 58,
+          "oyuncu_id": 459,
+          "oyuncu_adi": "Metin Tepeköy",
+          "grup_no": 16,
+          "grup_sirasi": 3,
+          "puan": 11,
+          "averaj": -24,
+          "ys1": 6,
+          "ys2": 5,
+          "ortalama": 0.729
         },
         {
           "eleme_sirasi": 59,
@@ -3358,18 +3358,6 @@ window.TURNUVA_VERISI = {
         },
         {
           "eleme_sirasi": 73,
-          "oyuncu_id": 459,
-          "oyuncu_adi": "Metin Tepeköy",
-          "grup_no": 16,
-          "grup_sirasi": 4,
-          "puan": 11,
-          "averaj": -24,
-          "ys1": 6,
-          "ys2": 5,
-          "ortalama": 0.729
-        },
-        {
-          "eleme_sirasi": 74,
           "oyuncu_id": 119,
           "oyuncu_adi": "Yaşar Taşcı",
           "grup_no": 2,
@@ -3381,7 +3369,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 0.322
         },
         {
-          "eleme_sirasi": 75,
+          "eleme_sirasi": 74,
           "oyuncu_id": 465,
           "oyuncu_adi": "Şenol Yücal",
           "grup_no": 1,
@@ -3393,7 +3381,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 0.562
         },
         {
-          "eleme_sirasi": 76,
+          "eleme_sirasi": 75,
           "oyuncu_id": 471,
           "oyuncu_adi": "Oruç Çapak",
           "grup_no": 3,
@@ -3405,7 +3393,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 1.15
         },
         {
-          "eleme_sirasi": 77,
+          "eleme_sirasi": 76,
           "oyuncu_id": 309,
           "oyuncu_adi": "İlkay Kaya",
           "grup_no": 6,
@@ -3417,7 +3405,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 0.799
         },
         {
-          "eleme_sirasi": 78,
+          "eleme_sirasi": 77,
           "oyuncu_id": 397,
           "oyuncu_adi": "Bilal Kanlı",
           "grup_no": 20,
@@ -3429,7 +3417,7 @@ window.TURNUVA_VERISI = {
           "ortalama": 0.644
         },
         {
-          "eleme_sirasi": 79,
+          "eleme_sirasi": 78,
           "oyuncu_id": 443,
           "oyuncu_adi": "Murat Başçı",
           "grup_no": 17,
@@ -3439,6 +3427,18 @@ window.TURNUVA_VERISI = {
           "ys1": 5,
           "ys2": 4,
           "ortalama": 0.49
+        },
+        {
+          "eleme_sirasi": 79,
+          "oyuncu_id": 287,
+          "oyuncu_adi": "Murat Tekin",
+          "grup_no": 16,
+          "grup_sirasi": 4,
+          "puan": 10,
+          "averaj": -28,
+          "ys1": 5,
+          "ys2": 5,
+          "ortalama": 0.57
         },
         {
           "eleme_sirasi": 80,
@@ -37884,27 +37884,6 @@ window.TURNUVA_VERISI = {
             },
             {
               "sira": 3,
-              "oyuncu_id": 287,
-              "oyuncu_adi": "Murat Tekin",
-              "handikap": 40,
-              "tur_no": 1,
-              "grup_no": 16,
-              "mac_sayisi": 9,
-              "galibiyet": 5,
-              "maglubiyet": 2,
-              "puan": 12,
-              "averaj": -16,
-              "ys1": 5,
-              "ys2": 5,
-              "beraberlik": 2,
-              "ortalama": 0.591,
-              "ortalama_metni": "0.591",
-              "toplam_sayi": 659,
-              "rakip_toplam_sayi": 628,
-              "toplam_istaka": 591
-            },
-            {
-              "sira": 4,
               "oyuncu_id": 459,
               "oyuncu_adi": "Metin Tepeköy",
               "handikap": 48,
@@ -37923,6 +37902,27 @@ window.TURNUVA_VERISI = {
               "toplam_sayi": 651,
               "rakip_toplam_sayi": 619,
               "toplam_istaka": 560
+            },
+            {
+              "sira": 4,
+              "oyuncu_id": 287,
+              "oyuncu_adi": "Murat Tekin",
+              "handikap": 40,
+              "tur_no": 1,
+              "grup_no": 16,
+              "mac_sayisi": 9,
+              "galibiyet": 4,
+              "maglubiyet": 3,
+              "puan": 10,
+              "averaj": -28,
+              "ys1": 5,
+              "ys2": 5,
+              "beraberlik": 2,
+              "ortalama": 0.57,
+              "ortalama_metni": "0.570",
+              "toplam_sayi": 647,
+              "rakip_toplam_sayi": 640,
+              "toplam_istaka": 591
             },
             {
               "sira": 5,
@@ -37968,6 +37968,27 @@ window.TURNUVA_VERISI = {
             },
             {
               "sira": 7,
+              "oyuncu_id": 401,
+              "oyuncu_adi": "Bilal Genç",
+              "handikap": 45,
+              "tur_no": 1,
+              "grup_no": 16,
+              "mac_sayisi": 7,
+              "galibiyet": 4,
+              "maglubiyet": 3,
+              "puan": 8,
+              "averaj": -28,
+              "ys1": 5,
+              "ys2": 5,
+              "beraberlik": 0,
+              "ortalama": 0.658,
+              "ortalama_metni": "0.658",
+              "toplam_sayi": 422,
+              "rakip_toplam_sayi": 408,
+              "toplam_istaka": 368
+            },
+            {
+              "sira": 8,
               "oyuncu_id": 385,
               "oyuncu_adi": "Ali İhsan Erler",
               "handikap": 35,
@@ -37986,27 +38007,6 @@ window.TURNUVA_VERISI = {
               "toplam_sayi": 704,
               "rakip_toplam_sayi": 707,
               "toplam_istaka": 714
-            },
-            {
-              "sira": 8,
-              "oyuncu_id": 401,
-              "oyuncu_adi": "Bilal Genç",
-              "handikap": 45,
-              "tur_no": 1,
-              "grup_no": 16,
-              "mac_sayisi": 7,
-              "galibiyet": 3,
-              "maglubiyet": 4,
-              "puan": 6,
-              "averaj": -40,
-              "ys1": 5,
-              "ys2": 5,
-              "beraberlik": 0,
-              "ortalama": 0.625,
-              "ortalama_metni": "0.625",
-              "toplam_sayi": 410,
-              "rakip_toplam_sayi": 420,
-              "toplam_istaka": 368
             },
             {
               "sira": 9,
@@ -38274,23 +38274,23 @@ window.TURNUVA_VERISI = {
               "oyuncu1_adi": "Murat Tekin",
               "oyuncu1_handikap": 40,
               "oyuncu1_istaka": 59,
-              "oyuncu1_sayi": 75,
+              "oyuncu1_sayi": 63,
               "oyuncu1_ys1": 3,
-              "oyuncu1_ys2": 3,
+              "oyuncu1_ys2": 2,
               "oyuncu1_ys3": 0,
               "oyuncu2_id": 401,
               "oyuncu2_adi": "Bilal Genç",
               "oyuncu2_handikap": 45,
               "oyuncu2_istaka": 59,
-              "oyuncu2_sayi": 63,
+              "oyuncu2_sayi": 75,
               "oyuncu2_ys1": 3,
-              "oyuncu2_ys2": 2,
+              "oyuncu2_ys2": 3,
               "oyuncu2_ys3": 0,
               "ys_hesaplama_surumu": 2,
-              "skor": "75 - 63",
-              "ys": "O1: 3/3/0  O2: 3/2/0",
-              "kazanan_id": 287,
-              "kazanan_adi": "Murat Tekin",
+              "skor": "63 - 75",
+              "ys": "O1: 3/2/0  O2: 3/3/0",
+              "kazanan_id": 401,
+              "kazanan_adi": "Bilal Genç",
               "beraberlik": false,
               "notlar": "",
               "istatistik_disi": false
@@ -50205,26 +50205,6 @@ window.TURNUVA_VERISI = {
               },
               {
                 "sira": 50,
-                "oyuncu_id": 287,
-                "oyuncu_adi": "Murat Tekin",
-                "handikap": 0,
-                "grup_no": 16,
-                "grup_sirasi": 3,
-                "mac_sayisi": 0,
-                "galibiyet": 0,
-                "maglubiyet": 0,
-                "puan": 12,
-                "averaj": -16,
-                "ys1": 5,
-                "ys2": 5,
-                "ortalama": 0.591,
-                "hedef_tur_no": null,
-                "hedef_tur_tipi": "",
-                "hedef_tur_adi": "",
-                "hedef_grup_no": null
-              },
-              {
-                "sira": 51,
                 "oyuncu_id": 352,
                 "oyuncu_adi": "Metin Dalan",
                 "handikap": 0,
@@ -50244,7 +50224,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 52,
+                "sira": 51,
                 "oyuncu_id": 328,
                 "oyuncu_adi": "Umut Beslem",
                 "handikap": 0,
@@ -50264,7 +50244,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 53,
+                "sira": 52,
                 "oyuncu_id": 356,
                 "oyuncu_adi": "Serkan Fitoz",
                 "handikap": 0,
@@ -50284,7 +50264,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 54,
+                "sira": 53,
                 "oyuncu_id": 407,
                 "oyuncu_adi": "Yaşar Çapak",
                 "handikap": 0,
@@ -50304,7 +50284,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 55,
+                "sira": 54,
                 "oyuncu_id": 279,
                 "oyuncu_adi": "Erhan Canbaz",
                 "handikap": 0,
@@ -50324,7 +50304,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 56,
+                "sira": 55,
                 "oyuncu_id": 375,
                 "oyuncu_adi": "Tanju Üretmen",
                 "handikap": 0,
@@ -50344,7 +50324,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 57,
+                "sira": 56,
                 "oyuncu_id": 382,
                 "oyuncu_adi": "Ali Karadağ",
                 "handikap": 0,
@@ -50364,7 +50344,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 58,
+                "sira": 57,
                 "oyuncu_id": 402,
                 "oyuncu_adi": "Şeref Işıkçı",
                 "handikap": 0,
@@ -50378,6 +50358,26 @@ window.TURNUVA_VERISI = {
                 "ys1": 8,
                 "ys2": 6,
                 "ortalama": 0.675,
+                "hedef_tur_no": null,
+                "hedef_tur_tipi": "",
+                "hedef_tur_adi": "",
+                "hedef_grup_no": null
+              },
+              {
+                "sira": 58,
+                "oyuncu_id": 459,
+                "oyuncu_adi": "Metin Tepeköy",
+                "handikap": 0,
+                "grup_no": 16,
+                "grup_sirasi": 3,
+                "mac_sayisi": 0,
+                "galibiyet": 0,
+                "maglubiyet": 0,
+                "puan": 11,
+                "averaj": -24,
+                "ys1": 6,
+                "ys2": 5,
+                "ortalama": 0.729,
                 "hedef_tur_no": null,
                 "hedef_tur_tipi": "",
                 "hedef_tur_adi": "",
@@ -50665,26 +50665,6 @@ window.TURNUVA_VERISI = {
               },
               {
                 "sira": 73,
-                "oyuncu_id": 459,
-                "oyuncu_adi": "Metin Tepeköy",
-                "handikap": 0,
-                "grup_no": 16,
-                "grup_sirasi": 4,
-                "mac_sayisi": 0,
-                "galibiyet": 0,
-                "maglubiyet": 0,
-                "puan": 11,
-                "averaj": -24,
-                "ys1": 6,
-                "ys2": 5,
-                "ortalama": 0.729,
-                "hedef_tur_no": null,
-                "hedef_tur_tipi": "",
-                "hedef_tur_adi": "",
-                "hedef_grup_no": null
-              },
-              {
-                "sira": 74,
                 "oyuncu_id": 119,
                 "oyuncu_adi": "Yaşar Taşcı",
                 "handikap": 0,
@@ -50704,7 +50684,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 75,
+                "sira": 74,
                 "oyuncu_id": 465,
                 "oyuncu_adi": "Şenol Yücal",
                 "handikap": 0,
@@ -50724,7 +50704,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 76,
+                "sira": 75,
                 "oyuncu_id": 471,
                 "oyuncu_adi": "Oruç Çapak",
                 "handikap": 0,
@@ -50744,7 +50724,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 77,
+                "sira": 76,
                 "oyuncu_id": 309,
                 "oyuncu_adi": "İlkay Kaya",
                 "handikap": 0,
@@ -50764,7 +50744,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 78,
+                "sira": 77,
                 "oyuncu_id": 397,
                 "oyuncu_adi": "Bilal Kanlı",
                 "handikap": 0,
@@ -50784,7 +50764,7 @@ window.TURNUVA_VERISI = {
                 "hedef_grup_no": null
               },
               {
-                "sira": 79,
+                "sira": 78,
                 "oyuncu_id": 443,
                 "oyuncu_adi": "Murat Başçı",
                 "handikap": 0,
@@ -50798,6 +50778,26 @@ window.TURNUVA_VERISI = {
                 "ys1": 5,
                 "ys2": 4,
                 "ortalama": 0.49,
+                "hedef_tur_no": null,
+                "hedef_tur_tipi": "",
+                "hedef_tur_adi": "",
+                "hedef_grup_no": null
+              },
+              {
+                "sira": 79,
+                "oyuncu_id": 287,
+                "oyuncu_adi": "Murat Tekin",
+                "handikap": 0,
+                "grup_no": 16,
+                "grup_sirasi": 4,
+                "mac_sayisi": 0,
+                "galibiyet": 0,
+                "maglubiyet": 0,
+                "puan": 10,
+                "averaj": -28,
+                "ys1": 5,
+                "ys2": 5,
+                "ortalama": 0.57,
                 "hedef_tur_no": null,
                 "hedef_tur_tipi": "",
                 "hedef_tur_adi": "",
@@ -82308,23 +82308,23 @@ window.TURNUVA_VERISI = {
       "oyuncu1_adi": "Murat Tekin",
       "oyuncu1_handikap": 40,
       "oyuncu1_istaka": 59,
-      "oyuncu1_sayi": 75,
+      "oyuncu1_sayi": 63,
       "oyuncu1_ys1": 3,
-      "oyuncu1_ys2": 3,
+      "oyuncu1_ys2": 2,
       "oyuncu1_ys3": 0,
       "oyuncu2_id": 401,
       "oyuncu2_adi": "Bilal Genç",
       "oyuncu2_handikap": 45,
       "oyuncu2_istaka": 59,
-      "oyuncu2_sayi": 63,
+      "oyuncu2_sayi": 75,
       "oyuncu2_ys1": 3,
-      "oyuncu2_ys2": 2,
+      "oyuncu2_ys2": 3,
       "oyuncu2_ys3": 0,
       "ys_hesaplama_surumu": 2,
-      "skor": "75 - 63",
-      "ys": "O1: 3/3/0  O2: 3/2/0",
-      "kazanan_id": 287,
-      "kazanan_adi": "Murat Tekin",
+      "skor": "63 - 75",
+      "ys": "O1: 3/2/0  O2: 3/3/0",
+      "kazanan_id": 401,
+      "kazanan_adi": "Bilal Genç",
       "beraberlik": false,
       "notlar": "",
       "istatistik_disi": false
@@ -158382,7 +158382,7 @@ window.TURNUVA_VERISI = {
         {
           "tur_no": 1,
           "grup_no": 16,
-          "sira": 7,
+          "sira": 8,
           "puan": 8,
           "averaj": -46,
           "ortalama": 0.426
@@ -159183,10 +159183,10 @@ window.TURNUVA_VERISI = {
         {
           "tur_no": 1,
           "grup_no": 16,
-          "sira": 8,
-          "puan": 6,
-          "averaj": -40,
-          "ortalama": 0.625
+          "sira": 7,
+          "puan": 8,
+          "averaj": -28,
+          "ortalama": 0.658
         }
       ],
       "mac_ozeti": {
@@ -159195,10 +159195,10 @@ window.TURNUVA_VERISI = {
         "kalan": 3,
         "planlanan": 0,
         "planlanmayan": 3,
-        "galibiyet": 3,
-        "maglubiyet": 4,
+        "galibiyet": 4,
+        "maglubiyet": 3,
         "beraberlik": 0,
-        "ortalama": 0.625
+        "ortalama": 0.658
       },
       "oynanan_maclar": [
         {
@@ -159217,23 +159217,23 @@ window.TURNUVA_VERISI = {
           "oyuncu1_adi": "Murat Tekin",
           "oyuncu1_handikap": 40,
           "oyuncu1_istaka": 59,
-          "oyuncu1_sayi": 75,
+          "oyuncu1_sayi": 63,
           "oyuncu1_ys1": 3,
-          "oyuncu1_ys2": 3,
+          "oyuncu1_ys2": 2,
           "oyuncu1_ys3": 0,
           "oyuncu2_id": 401,
           "oyuncu2_adi": "Bilal Genç",
           "oyuncu2_handikap": 45,
           "oyuncu2_istaka": 59,
-          "oyuncu2_sayi": 63,
+          "oyuncu2_sayi": 75,
           "oyuncu2_ys1": 3,
-          "oyuncu2_ys2": 2,
+          "oyuncu2_ys2": 3,
           "oyuncu2_ys3": 0,
           "ys_hesaplama_surumu": 2,
-          "skor": "75 - 63",
-          "ys": "O1: 3/3/0  O2: 3/2/0",
-          "kazanan_id": 287,
-          "kazanan_adi": "Murat Tekin",
+          "skor": "63 - 75",
+          "ys": "O1: 3/2/0  O2: 3/3/0",
+          "kazanan_id": 401,
+          "kazanan_adi": "Bilal Genç",
           "beraberlik": false,
           "notlar": "",
           "istatistik_disi": false
@@ -161187,7 +161187,7 @@ window.TURNUVA_VERISI = {
         {
           "tur_no": 1,
           "grup_no": 16,
-          "sira": 4,
+          "sira": 3,
           "puan": 11,
           "averaj": -24,
           "ortalama": 0.729
@@ -161588,10 +161588,10 @@ window.TURNUVA_VERISI = {
         {
           "tur_no": 1,
           "grup_no": 16,
-          "sira": 3,
-          "puan": 12,
-          "averaj": -16,
-          "ortalama": 0.591
+          "sira": 4,
+          "puan": 10,
+          "averaj": -28,
+          "ortalama": 0.57
         }
       ],
       "mac_ozeti": {
@@ -161600,10 +161600,10 @@ window.TURNUVA_VERISI = {
         "kalan": 1,
         "planlanan": 0,
         "planlanmayan": 1,
-        "galibiyet": 5,
-        "maglubiyet": 2,
+        "galibiyet": 4,
+        "maglubiyet": 3,
         "beraberlik": 2,
-        "ortalama": 0.591
+        "ortalama": 0.57
       },
       "oynanan_maclar": [
         {
@@ -161770,23 +161770,23 @@ window.TURNUVA_VERISI = {
           "oyuncu1_adi": "Murat Tekin",
           "oyuncu1_handikap": 40,
           "oyuncu1_istaka": 59,
-          "oyuncu1_sayi": 75,
+          "oyuncu1_sayi": 63,
           "oyuncu1_ys1": 3,
-          "oyuncu1_ys2": 3,
+          "oyuncu1_ys2": 2,
           "oyuncu1_ys3": 0,
           "oyuncu2_id": 401,
           "oyuncu2_adi": "Bilal Genç",
           "oyuncu2_handikap": 45,
           "oyuncu2_istaka": 59,
-          "oyuncu2_sayi": 63,
+          "oyuncu2_sayi": 75,
           "oyuncu2_ys1": 3,
-          "oyuncu2_ys2": 2,
+          "oyuncu2_ys2": 3,
           "oyuncu2_ys3": 0,
           "ys_hesaplama_surumu": 2,
-          "skor": "75 - 63",
-          "ys": "O1: 3/3/0  O2: 3/2/0",
-          "kazanan_id": 287,
-          "kazanan_adi": "Murat Tekin",
+          "skor": "63 - 75",
+          "ys": "O1: 3/2/0  O2: 3/3/0",
+          "kazanan_id": 401,
+          "kazanan_adi": "Bilal Genç",
           "beraberlik": false,
           "notlar": "",
           "istatistik_disi": false
