@@ -1,4 +1,4 @@
-const CACHE_VERSION = "20261109122015195107";
+const CACHE_VERSION = "20261110030802942592";
 const STATIC_CACHE = `turnuva-sonuclari-static-${CACHE_VERSION}`;
 const DATA_CACHE = `turnuva-sonuclari-data-${CACHE_VERSION}`;
 const STATIC_FILES = [
